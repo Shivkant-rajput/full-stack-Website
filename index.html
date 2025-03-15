@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My user Name</title>
+    <link rel="stylesheet" href="1.css">
+
+</head>
+
+<body>
+
+
+
+
+
+
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+
+
+
+
+    <!-- <input type="text" name="username" placeholder="Username" required>
+<input type="password" name="password" placeholder="Password" required minlength="6"> -->
+
+
+    </footer>
+
+    <form action="">
+        <h1>Hi, I'm Shivkant Rajput </h1>
+        <div class="red">
+            <p>Frontend Developer | Tech Enthusiast
+            </p>
+        </div>
+        <h2>About Me</h2>
+
+        <p>
+            Hello! I'm Shivkant Rajput, a Frontend Developer with a passion for designing modern and responsive
+            websites.
+            Currently pursuing my diploma in IT from Government Polytechnic Ghaziabad, I have experience in building web
+            applications using HTML, CSS, JavaScript, and React JS.
+        </p>
+
+        <h2>Contact me</h2>
+        <a href="mailto:shivkants910@gamil.com">shivkants910@gmail.com</a>
+
+
+        <h4>Enter the Username & paswword</h4>
+        <span>
+            <input type="text" placeholder="Username">
+            <br> <br>
+            <input type="password" placeholder="Password">
+        </span>
+        <h4>Select Company for Application</h4>
+        <div>
+            <label for="Microsoft">
+                <input type="checkbox" value="Microsoft" name="Company" id="101"> Microsoft
+            </label><br>
+            <label for="Google">
+                <input type="checkbox" value="Google" name="Company" id="101"> Google
+            </label><br>
+            <label for="Facebook">
+                <input type="checkbox" value="Facebook" name="Company" id="101"> Facebook
+            </label><br>
+            <label for="Apple">
+                <input type="checkbox" value="Apple" name="Company" id="101"> Apple
+            </label><br>
+            <label for="IBM">
+                <input type="checkbox" value="IBM" name="Company" id="101"> IBM
+            </label>
+        </div>
+        <h4>Select Your City</h4>
+        <select name="City">
+            <option value="City">City</option>
+            <option value="Mumbai">Mumbai</option>
+            <option value="Delhi">Delhi</option>
+            <option value="Dubai">Dubai</option>
+            <option value="America(USA)">America(USA)</option>
+            <option value="Malesiya">Malesiya</option>
+            <option value="Australiya">Australiya</option>
+            <option value="India">India</option>
+            <option value="Russia">Russia</option>
+        </select>
+        <h4>please give your Feedback</h4>
+        <span>
+            <textarea name="Feedback" id="105" placeholder="pelase give your Feedback here"></textarea>
+        </span>
+        <!-- OR -->
+        <!-- <label for="City "><b>Select your city </b></label>
+<select name="City" id="City">
+    <option>city</option>
+    <option>Delhi</option>
+    <option>Russia</option>
+    <option>bangolure</option>
+    <option>USA</option>
+</select> -->
+        <h4>Please submit your Form</h4>
+        <div class="container">
+            <input type="Submit" value="Submit">
+        </div>
+
+    </form>
+
+
+
+
+
+
+
+    <h1>Add New User</h1>
+    <form id="userForm">
+        <div class="c">
+
+            <input type="text" id="name" placeholder="Enter name" />
+            <input type="email" id="email" placeholder="Enter email" />
+        </div>
+
+        <button type="submit">Add User</button>
+    </form>
+
+    <h2>All Users</h2>
+    <ul id="usersList"></ul>
+    <script src="1.js"></script>
+    <ul id="usersList"></ul>
+
+
+
+    <footer class="footer">
+        <p>© 2025 Shivkant Rajput. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // Data Fetch kar rahe hain
+        function loadUsers() {
+            fetch('http://localhost:3000/users')
+                .then(res => res.json())
+                .then(data => {
+                    const list = document.getElementById('usersList');
+                    list.innerHTML = ''; // Purana clear karo
+                    data.forEach(user => {
+                        const li = document.createElement('li');
+                        li.innerText = ${ user.name } (${ user.email });
+                    list.appendChild(li);
+                });
+        });
+  }
+
+        // Page Load pe users dikhao
+        loadUsers();
+
+        // Form Submit Event
+        document.getElementById('userForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+
+            fetch('http://localhost:3000/users', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name, email })
+            })
+                .then(res => res.text())
+                .then(msg => {
+                    alert(msg);
+                    loadUsers(); // New user dikhane ke liye reload
+                });
+        });
+    </script>
+</body>
+
+</html>
